@@ -32,11 +32,11 @@ int sc_main(int argc, char *argv[])
     display d1("display");
     d1 << DOUT;
     timer tm1("timer");
-    tm1 << START << TIMEOUT << CLOCK.signal();
+    tm1 << START << TIMEOUT << CLOCK;
     // tracing: trace file creation
     sc_trace_file *tf = sc_create_vcd_trace_file("simplex");
     // External Signals
-    sc_trace(tf, CLOCK.signal(), "clock");
+    sc_trace(tf, CLOCK, "clock");
     sc_trace(tf, TIMEOUT, "timeout");
     sc_trace(tf, START, "start");
     sc_trace(tf, PACKET1, "packet1");
@@ -44,7 +44,7 @@ int sc_main(int argc, char *argv[])
     sc_trace(tf, PACKET3, "packet3");
     sc_trace(tf, PACKET4, "packet4");
     sc_trace(tf, DOUT, "dout");
-    sc_start(10000);
+    sc_start(10000, SC_PS);
     sc_close_vcd_trace_file(tf);
     return (0);
 }
