@@ -10,8 +10,11 @@ int sc_main(int argc, char *argv[])
     sc_signal < packet_type > PACKET1, PACKET2, PACKET3, PACKET4;
     sc_signal < long >DOUT;
     sc_signal < bool > TIMEOUT, START;
-    sc_clock CLOCK("clock", 20);    // transmit clock
-    sc_clock RCLK("rclk", 15);      // receive clock
+
+    // Update API to version 2.3.1
+    sc_clock CLOCK("clock", 20, SC_NS);    // transmit clock
+    sc_clock RCLK("rclk", 15, SC_NS);      // receive clock
+
     transmit t1("transmit");
     t1.tpackin(PACKET2);
     t1.timeout(TIMEOUT);
@@ -30,13 +33,24 @@ int sc_main(int argc, char *argv[])
     r1.dout(DOUT);
     r1.rclk(RCLK);
     display d1("display");
-    d1 << DOUT;
+
+    // Update API to version 2.3.1
+    d1.din(DOUT);
+
     timer tm1("timer");
-    tm1 << START << TIMEOUT << CLOCK;
+
+    // Update API to version 2.3.1
+    tm1.start(START);
+    tm1.timeout(TIMEOUT);
+    tm1.clock(CLOCK);
+
     // tracing: trace file creation
     sc_trace_file *tf = sc_create_vcd_trace_file("simplex");
     // External Signals
+
+    // Update API to version 2.3.1
     sc_trace(tf, CLOCK, "clock");
+
     sc_trace(tf, TIMEOUT, "timeout");
     sc_trace(tf, START, "start");
     sc_trace(tf, PACKET1, "packet1");
@@ -44,7 +58,10 @@ int sc_main(int argc, char *argv[])
     sc_trace(tf, PACKET3, "packet3");
     sc_trace(tf, PACKET4, "packet4");
     sc_trace(tf, DOUT, "dout");
-    sc_start(10000, SC_PS);
+
+    // Update API to version 2.3.1
+    sc_start(10000, SC_NS);
+
     sc_close_vcd_trace_file(tf);
     return (0);
 }

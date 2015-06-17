@@ -1,4 +1,5 @@
 // packet.h file
+// Update User Defined Types to version 2.3.1
 #ifndef PACKETINC
 #define PACKETINC
 #include <systemc.h>

@@ -7,7 +7,9 @@ void timer::runtimer()
             cout << "Timer: timer start detected" << endl;
             count = 5;      // need to make this a constant
             timeout = false;
-            start = false;
+
+            //start = false; // bug fix
+
         } else {
             if (count > 0) {
                 count--;

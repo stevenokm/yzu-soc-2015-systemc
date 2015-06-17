@@ -33,6 +33,11 @@ void transmit::send_data()
             tpackout = s;
             start_timer = true;
             cout << "Transmit:Sending packet no. " << s.seq << "\n";
+
+        // bug fix
+        } else {
+            start_timer = false;
+
         }
     }
 }

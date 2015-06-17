@@ -1,5 +1,5 @@
 // display.h
-#include "systemc.h"
+#include <systemc.h>
 #include "packet.h"
 SC_MODULE(display)
 {
