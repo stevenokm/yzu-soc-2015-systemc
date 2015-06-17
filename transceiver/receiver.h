@@ -13,7 +13,10 @@ SC_MODULE(receiver)
     // Constructor
     SC_CTOR(receiver) {
         SC_METHOD(receive_data);    // Method Process
-        sensitive_pos << rclk;
+
+        // Update API to version 2.3.1
+        sensitive << rclk.pos();
+
         framenum = 1;
         retry = 1;
     }
